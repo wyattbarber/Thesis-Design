@@ -4,20 +4,26 @@ include <params.scad>
 
 
 module loop(
-    h, d_h,
+    h, h_i, d_h, b,
     l, w_o, w_i
 )
 {
     a = l;
     
-    translate([-w_o/2 - d_h/4, 0, 0])
-    rotate([0,0,180])
-    half_ring(h, d_h/2, d_h/2-1);
     
     // Loop ends
     difference()
     {
-        half_ring(h, w_o/2, w_i/2);
+        union()
+        {        
+            translate([
+                -b - w_i/2,
+                -h/2,
+                0
+            ])
+            cutout_block(h, h_i, b+eps);
+            half_ring(h, w_o/2, w_i/2);
+        }
         union()
         {
             translate([0, d_h, h/2])
@@ -49,6 +55,6 @@ module loop(
 };
 
 loop(
-    conn_outer, bend_link_diam,
+    conn_outer, conn_inner, bend_link_diam, conn_length,
     loop_length, loop_outer, loop_inner
 );
