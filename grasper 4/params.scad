@@ -12,14 +12,15 @@ servo_spacing = 25;
 servo_mount_length = servo_length + 10;
 servo_mount_width = servo_spacing + servo_width + 10;
 servo_mount_height = servo_depth * 3/2;
-servo_attach_length = 10;
-servo_attach_width = 20;
+//servo_attach_length = 10;
+servo_gear_shaft = 8;
 
 // Connections between links
 conn_length = 2*servo_attach_length;
-conn_outer = servo_attach_width - del;
+conn_outer = 23;
 conn_inner = conn_outer - 4;
 connector_width = conn_outer + 4;
+servo_attach_width = conn_outer+2;
 
 // Cable and flex guide routing
 cable_d = 3;
@@ -29,6 +30,7 @@ base_thickness = 0.5;
 spool_diam_o = 20;
 spool_diam_i = spool_diam_o - 5;
 spool_t = 6;
+servo_attach_length = 32 - spool_diam_o;
 
 // Bend parameters
 bend_length = 200;
