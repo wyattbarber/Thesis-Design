@@ -21,4 +21,6 @@ cpu_carrier/**
 !cpu_carrier/components/SRP7050TA_3R3M/footprints.pretty/**.step
 !cpu_carrier/components.pretty
 !cpu_carrier/components.pretty/**.kicad_**
+servo controller/**
+!servo controller/*.kicad_*
 **/__pycache__/**
