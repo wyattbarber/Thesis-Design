@@ -15,7 +15,7 @@ M_p = fill_param(
     [10, 30, 30],
     15,
     10,
-    [90, 70],
+    [110, 70],
     10, 
     10, 40,
     11.1760,
@@ -34,9 +34,14 @@ module servo_hole()
 {
     difference()
     {
-        cube([26, 16, 5]);
-        translate([2,2,-0.5])
-        cube([22.1, 12.1, 6]);
+        cube([26, 10, 16]);
+        union()
+        {
+            translate([2-del, 1, 2-del])
+            cube([22+2*del, 10, 12+2*del]);            
+            translate([-eps, 4+eps, 4+2-del])
+            cube([10, 6, 5]);
+        }
     }
 }
 
@@ -62,7 +67,17 @@ translate([
     100-conn_inner-1,
     -3
 ])
-cube([conn_inner+1, conn_inner, 3]);
+difference()
+{
+    cube([conn_inner+1, conn_inner, 3]);
+    union()
+    {
+        translate([conn_inner * 3/4, conn_inner/2, -0.5])
+        cylinder(h=4, r=2);
+        translate([conn_inner * 1/4, conn_inner/2, -0.5])
+        cylinder(h=4, r=2);
+    }
+}
 translate([3,struct_val(M_p, "My"),-1])
 servo_hole();
 translate([-29,struct_val(M_p, "My"),-1])

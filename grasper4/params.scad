@@ -27,10 +27,10 @@ servo_attach_width = conn_outer+2;
 cable_d = 3;
 flex_t = 3;
 flex_w = conn_inner * 0.75;
-base_thickness = 0.5;
-spool_diam_o = 20;
-spool_diam_i = spool_diam_o - 5;
-spool_t = 6;
+base_thickness = 3;
+spool_diam_o = 25;
+spool_t = 10;
+spool_diam_i = spool_diam_o - spool_t;
 servo_attach_length = 32 - spool_diam_o;
 conn_length = 2*servo_attach_length;
 

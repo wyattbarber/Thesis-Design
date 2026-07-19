@@ -17,11 +17,17 @@ module cutout_block(w, wi, d)
     difference()
     {
         cube([d, w, w]);
-        translate([-eps, (w-wi)/2, (w-wi)/2])
-        cube([d/2+eps, wi, wi]);
+        union()
+        {
+            translate([-eps, (w-wi)/2, (w-wi)/2])
+            cube([d/2+eps, wi, wi]);
+            translate([w/2, w*3/4, -0.5])
+            cylinder(h=w+1, r=2);
+            translate([w/2, w/4, -0.5])
+            cylinder(h=w+1, r=2);
+        }
     }
 };
-
 
 module flared_cylinder(h, r, rb)
 {
