@@ -40,7 +40,7 @@ bend_n = 25;
 bend_link_diam = 5;
 bend_width = 20;
 bend_thickness = 10;
-bend_twist = 20;
+bend_twist = 0;
 
 // Loop parameters
 loop_outer = 20;

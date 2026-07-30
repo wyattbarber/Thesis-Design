@@ -36,6 +36,8 @@ module double_spool(d_o, d_i, t, s_d)
 
 // Single spool
 servo_spool(spool_diam_o, spool_diam_i, spool_t, 7.5);
+translate([30, 0, 0])
+servo_spool(spool_diam_o, spool_diam_i, spool_t, 7.5);
 
 // Dual-direction spool
 //translate([spool_diam_o+1, 0, 0])

@@ -45,9 +45,9 @@ module right_bend(
             translate([b/2, h/2, 2*h/3])
             rotate([0, 90, 0])
             flared_cylinder(l-b, d/2, d/2 + 1);
-            // Flex guide
-            translate([-l/4, (h-w_g)/2, (h-h_i)/2])
-            cube([2*l, w_g, h_g]);
+//            // Flex guide
+//            translate([-l/4, (h-w_g)/2, (h-h_i)/2])
+//            cube([2*l, w_g, h_g]);
         }
     }
 };

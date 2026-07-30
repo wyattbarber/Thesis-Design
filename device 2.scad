@@ -69,13 +69,23 @@ translate([
 ])
 difference()
 {
-    cube([conn_inner+1, conn_inner, 3]);
+    union()
+    {
+        cube([conn_inner+1, conn_inner, 3]);
+        cable_guide_r = 8;
+        translate([conn_inner+cable_guide_r, conn_inner, 0])
+        cylinder(h=conn_inner+6, r=cable_guide_r);
+        translate([conn_inner, 0, 0])
+        cube([2*cable_guide_r, conn_inner, conn_inner+6]);
+        translate([0, 0, conn_inner+3])
+        cube([conn_inner+1, conn_inner, 3]);
+    }
     union()
     {
         translate([conn_inner * 3/4, conn_inner/2, -0.5])
-        cylinder(h=4, r=2);
+        cylinder(h=conn_inner*2, r=2);
         translate([conn_inner * 1/4, conn_inner/2, -0.5])
-        cylinder(h=4, r=2);
+        cylinder(h=conn_inner*2, r=2);
     }
 }
 translate([3,struct_val(M_p, "My"),-1])
