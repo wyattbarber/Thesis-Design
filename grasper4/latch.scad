@@ -116,4 +116,4 @@ module gear(
 
 //pin(conn_inner*1.2, 5, servo_mount_length, pin_diam, 10);
 
-//gear(conn_inner*1.2, 5, servo_mount_length, pin_diam, 10);
+gear(conn_inner*1.2, 5, servo_mount_length, pin_diam, 10);
