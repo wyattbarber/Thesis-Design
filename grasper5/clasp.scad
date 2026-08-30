@@ -252,25 +252,53 @@ assert(r_2 > r_1, "Guide outer radius is smaller than inner radius");
 assert(abs(r_g - pitch_radius(circ_p, n_g)) <= 0.5, "Servo gear cannot correctly align");
 assert(abs(r_5 - gear_dist(n, n_g, circ_pitch=circ_p)) <= 0.5, "Servo gear cannot correctly align");
 
+slice_thickness = 6.35; // 1/4 inch thick slices
+assemble = true;
 
-linear_extrude(6.35) union() // 1/4 inch slices
+if(assemble)
 {
-    translate([0, 2 * r_2 + 15, 0])
+
+    color("red")
+    translate([0, 0, -slice_thickness])
+    linear_extrude(slice_thickness)
     track_ring_1(r_1, r_2, r_5, theta_o, theta_s, theta_sp, theta_b, theta_bp, mount_width);
-    
+
+    linear_extrude(slice_thickness)
     track_ring_2(r_1, r_2, r_3, r_4, circ_p, n, 
     theta_o, theta_s, theta_sp, theta_b, theta_bp, mount_width);
-
-    translate([0, -2 * r_2 - 15, 0])
-    track_ring_3(r_1, r_2, theta_o, theta_s, theta_sp, theta_b, theta_bp, mount_width);
-        
-    rotate([180, 0, 0])
-    translate([-2 * r_2 - 10, 0, 0])
+    
+    color("green")
+    translate([0,0,0.1])
+    linear_extrude(slice_thickness)
+    rotate([180, 0, -theta_o])
     gear_ring(r_3, circ_p, n, theta_o, theta_b, theta_bp);
+    
+    color("blue")
+    rotate([0,0,270-theta_sp])
+    translate([r_5, 0, 0])
+    servo_gear(circ_p, n_g, slice_thickness);
+    
+} else {
+
+    linear_extrude(slice_thickness) union() // 1/4 inch slices
+    {
+        translate([0, 2 * r_2 + 15, 0])
+        track_ring_1(r_1, r_2, r_5, theta_o, theta_s, theta_sp, theta_b, theta_bp, mount_width);
+        
+        track_ring_2(r_1, r_2, r_3, r_4, circ_p, n, 
+        theta_o, theta_s, theta_sp, theta_b, theta_bp, mount_width);
+
+        translate([0, -2 * r_2 - 15, 0])
+        track_ring_3(r_1, r_2, theta_o, theta_s, theta_sp, theta_b, theta_bp, mount_width);
+            
+        rotate([180, 0, 0])
+        translate([-2 * r_2 - 10, 0, 0])
+        gear_ring(r_3, circ_p, n, theta_o, theta_b, theta_bp);
+    }
+
+    translate([-2 * r_2 - 10, 0, 0])
+    servo_gear(circ_p, n_g, slice_thickness);
+    
 }
-
-translate([-2 * r_2 - 10, 0, 0])
-servo_gear(circ_p, n_g, 6.35);
-
 
 
