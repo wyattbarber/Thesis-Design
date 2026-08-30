@@ -49,8 +49,13 @@ module latch(
             translate([-w2/2, -t2+l4, l3-(d1+del)/2 - 2])
             cube([w3, d1/2+1, d1+4]);
         };
-        translate([-500, -t2+l4-(d1+del)/2, l3-(d1+del)/2])
-        cube([1000, (d1+del), (d1+del)]);
+        union()
+        {
+            translate([-500, -t2+l4-(d1+del)/2, l3-(d1+del)/2])
+            cube([1000, (d1+del), (d1+del)]);
+            translate([(sl+2*del)+l1-eps, -t2-eps, h2/2])
+            cube([w2+2*eps, t2/2+eps, h2/2+eps]);
+        }
     }
 };
 
@@ -105,7 +110,7 @@ module gear(
     };
 }
 
-//
+
 //latch(
 //    conn_inner*1.2, 5, servo_mount_length,
 //    servo_width+5, pin_height+3*pin_diam/2, pin_height - pin_diam/2 - (loop_outer-loop_inner)/2 - 2,
@@ -116,4 +121,4 @@ module gear(
 
 //pin(conn_inner*1.2, 5, servo_mount_length, pin_diam, 10);
 
-gear(conn_inner*1.2, 5, servo_mount_length, pin_diam, 10);
+//gear(conn_inner*1.2, 5, servo_mount_length, pin_diam, 10);

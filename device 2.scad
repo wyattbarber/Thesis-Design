@@ -63,29 +63,29 @@ difference()
 
 // Grasper mount
 translate([
-    -struct_val(M_p, "Mx")/2 - struct_val(M_p, "Mbx") - conn_inner,
-    100-conn_inner-1,
+    -struct_val(M_p, "Mx")/2 - struct_val(M_p, "Mbx") - conn_outer,
+    100-conn_outer-1,
     -3
 ])
 difference()
 {
     union()
     {
-        cube([conn_inner+1, conn_inner, 3]);
+        cube([conn_outer+1, conn_outer, 3]);
         cable_guide_r = 8;
-        translate([conn_inner+cable_guide_r, conn_inner, 0])
-        cylinder(h=conn_inner+6, r=cable_guide_r);
-        translate([conn_inner, 0, 0])
-        cube([2*cable_guide_r, conn_inner, conn_inner+6]);
-        translate([0, 0, conn_inner+3])
-        cube([conn_inner+1, conn_inner, 3]);
+        translate([conn_outer+cable_guide_r, conn_outer, 0])
+        cylinder(h=conn_outer+6, r=cable_guide_r);
+        translate([conn_outer, 0, 0])
+        cube([2*cable_guide_r, conn_outer, conn_outer+6]);
+        translate([0, 0, conn_outer+3])
+        cube([conn_outer+1, conn_outer, 3]);
     }
     union()
     {
-        translate([conn_inner * 3/4, conn_inner/2, -0.5])
-        cylinder(h=conn_inner*2, r=2);
-        translate([conn_inner * 1/4, conn_inner/2, -0.5])
-        cylinder(h=conn_inner*2, r=2);
+        translate([conn_outer * 3/4, conn_outer/2, -0.5])
+        cylinder(h=conn_outer*2, r=2);
+        translate([conn_outer * 1/4, conn_outer/2, -0.5])
+        cylinder(h=conn_outer*2, r=2);
     }
 }
 translate([3,struct_val(M_p, "My"),-1])
@@ -112,15 +112,23 @@ latch(
 // Camera plates
 difference()
 {
-    translate([camera_baseline/2 - 15, -15, 17])
-    cube([35, 20, 3]);
+    union()
+    {
+        translate([camera_baseline/2 - 15, -15, 17])
+        cube([35, 20, 3]);        
+        camera_standoffs(camera_baseline/2, -2.5, 18.9, 4, 2);
+    }
     translate([camera_baseline/2, 0, 20-0.1])
     camera_and_mount_diff(camera_standoff);
 };
 difference()
-{
-    translate([-camera_baseline/2 - 20, -15, 17])
-    cube([35, 20, 3]);
+{   
+    union()
+    {
+        translate([-camera_baseline/2 - 20, -15, 17])
+        cube([35, 20, 3]);        
+        camera_standoffs(-camera_baseline/2, -2.5, 18.9, 4, 2);
+    }
     translate([-camera_baseline/2, 0, 20-0.1])
     camera_and_mount_diff(camera_standoff);
 };
